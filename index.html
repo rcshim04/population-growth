@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelling Population Growth</title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <script src="static/js/solution.js"></script>
+    <script src="static/js/index.js"></script>
+</head>
+<body>
+    <background></background>
+    <container>
+        <form class="variables">
+            <div class="inputs">
+                <div>
+                    <label for="unit">Time Unit:</label><br>
+                    <select name="unit" id="unit" required oninvalid="this.setCustomValidity('Please choose a time unit.')" oninput="this.setCustomValidity('')">
+                        <option disabled selected value>Select an Option</option>
+                        <option value="millisecond">Milliseconds</option>
+                        <option value="second">Seconds</option>
+                        <option value="minute">Minutes</option>
+                        <option value="hour">Hours</option>
+                        <option value="day">Days</option>
+                        <option value="month">Months</option>
+                        <option value="year">Years</option>
+                    </select><br>
+
+                    <label for="initial">Initial Population:</label><br>
+                    <input type="text" id="initial" name="initial" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please enter an initial population.')" oninput="this.setCustomValidity('')"><br>
+
+                    <label for="capacity">Carrying Capacity:</label><br>
+                    <input type="text" id="capacity" name="capacity" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please enter a carrying capacity.')" oninput="this.setCustomValidity('')"><br>
+                </div>
+                <fieldset>
+                    <legend id="sample-label">The population is <span class="underline">        </span> after <span class="underline">        </span> time</legend>
+                    <label for="sample-pop">Population:</label><br>
+                    <input type="text" id="sample-pop" name="sample-pop" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a population.')" oninput="this.setCustomValidity('')"><br>
+                    <label for="sample-time" id="sample-time-label">Time:</label><br>
+                    <input type="text" id="sample-time" name="sample-time" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a time.')" oninput="this.setCustomValidity('')"><br>
+                </fieldset>
+            </div>
+            <div class="q-input">
+                <label for="question">Find the value at a specific <span class="underline">        </span>:</label><br>
+                <select name="question" id="question" required oninvalid="this.setCustomValidity('Please choose what answer to find.')" oninput="this.setCustomValidity('')">
+                    <option disabled selected value>Select an Option</option>
+                    <option value="population">Population</option>
+                    <option value="time">Time</option>
+                </select><br>
+            </div>
+            <div class="a-input">
+                <label for="answer" id="answer-label" required oninvalid="this.setCustomValidity('Please enter a value.')" oninput="this.setCustomValidity('')"></label><br>
+                <input type="text" id="answer" name="answer" onkeypress="return onlyNumberKey(event)"><br>
+            </div>
+            <input type="submit" id="submit" value="Submit">
+          </form>
+    </container>
+</body>
+</html>
