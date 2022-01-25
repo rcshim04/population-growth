@@ -142,20 +142,18 @@ function graph(params, coords) {
         .datum(data)
         .attr('clip-path', 'url(#chart-area)')
         .attr('fill', 'none')
-        .attr('stroke', '#01796f')
+        .attr('stroke', $(':root').css('--theme'))
         .attr('stroke-width', 2)
         .attr('d', line_func);
     
     svg.append('text')
         .attr('x', w/2)
         .attr('y', 520)
-        .style('fill', '#01796f')
         .text('Time');
     svg.append('text')
         .attr('x', 20)
         .attr('y', h/2)
         .attr('transform', `rotate(-90, 30, ${h/2})`)
-        .style('fill', '#01796f')
         .text('Population');
 
     let xAxis = d3.axisBottom(xScale);
@@ -171,7 +169,6 @@ function graph(params, coords) {
     svg.append('g')
         .append('circle')
         .style('fill', 'none')
-        .attr('stroke', '#01796f')
         .attr('r', 5)
         .attr('cx', xScale(coords[0]))
         .attr('cy', yScale(coords[1]));
@@ -179,7 +176,6 @@ function graph(params, coords) {
         .append('text')
         .attr('text-anchor', 'left')
         .attr('alignment-baseline', 'middle')
-        .style('fill', '#01796f')
         .html(coords[0] + ', ' + coords[1])
         .attr('x', xScale(coords[0])+15)
         .attr('y', yScale(coords[1]));

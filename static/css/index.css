@@ -75,8 +75,14 @@ function {
     max-width: 960px;
     max-height: 540px;
 }
+path, circle {
+    stroke: var(--theme);
+}
+text {
+    fill: var(--theme);
+}
 #theme {
-    position: absolute;
+    position: fixed;
     top: 25px;
     right: 25px;
     width: 40px;
