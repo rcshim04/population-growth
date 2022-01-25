@@ -3,25 +3,28 @@
 :root {
     font-family: "Poppins", sans-serif;
 }
+input, select, option {
+    font-family: inherit;
+    font-size: 1em;
+}
 body {
     margin: 0;
+    padding: 0;
     background-color: white;
-}
-background {
     background-image: url("../img/graph-paper.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
+}
+body::-webkit-scrollbar {
+    display: none;
 }
 container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 25px;
 }
 .inputs {
     display: flex;
@@ -29,9 +32,12 @@ container {
 .inputs > * {
     margin: 0 10px;
 }
-.q-input, .a-input {
-    display: none;
+.q-input {
     margin: 0 10px;
+}
+.a-input {
+    margin: 0 10px;
+    display: none;
 }
 #submit {
     margin: 10px;
@@ -39,4 +45,10 @@ container {
 .underline {
     text-decoration: underline; 
     white-space: pre;
+}
+function {
+    display: none;
+}
+#graph {
+    display: none;
 }

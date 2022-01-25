@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modelling Population Growth</title>
     <link rel="stylesheet" href="static/css/index.css">
+    <script src="static/js/d3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="static/js/solution.js"></script>
     <script>
         MathJax = {
             tex: {
@@ -17,12 +18,9 @@
     </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="static/js/jsMath/easy/load.js"></script>
-    <script src="static/js/solution.js"></script>
     <script src="static/js/index.js"></script>
 </head>
 <body>
-    <background></background>
     <container>
         <form class="variables">
             <div class="inputs">
@@ -62,11 +60,13 @@
                 </select><br>
             </div>
             <div class="a-input">
-                <label for="answer" id="answer-label" required oninvalid="this.setCustomValidity('Please enter a value.')" oninput="this.setCustomValidity('')"></label><br>
-                <input type="text" id="answer" name="answer" onkeypress="return onlyNumberKey(event)"><br>
+                <label for="arg" id="arg-label" required oninvalid="this.setCustomValidity('Please enter a value.')" oninput="this.setCustomValidity('')"></label><br>
+                <input type="text" id="arg" name="arg" onkeypress="return onlyNumberKey(event)"><br>
             </div>
-            <input type="submit" id="submit" value="Submit">
-          </form>
+            <input type="submit" id="submit" value="Solve!">
+        </form>
+        <function></function>
+        <svg id="graph" width="960" height="540"></svg>
     </container>
 </body>
 </html>
