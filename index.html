@@ -49,7 +49,7 @@
                     <label for="sample-pop">Population:</label><br>
                     <input type="number" id="sample-pop" name="sample-pop" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a population.')" oninput="this.setCustomValidity('')"><br>
                     <label for="sample-time" id="sample-time-label">Time:</label><br>
-                    <input type="number" id="sample-time" name="sample-time" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a time.')" oninput="this.setCustomValidity('')"><br>
+                    <input type="number" id="sample-time" name="sample-time" min="1" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a time.')" oninput="this.setCustomValidity('')"><br>
                 </fieldset>
             </div>
             <div class="q-input">
