@@ -3,6 +3,11 @@ $(document).ready(function (){
         var unit = $('#unit').find(':selected').text().toLowerCase();
         $('#sample-label').html(`The population is <span class="underline">        </span> after <span class="underline">        </span> ${unit}`)
         $('#sample-time-label').html(unit.substr(0,1).toUpperCase()+unit.substr(1)+':');
+        if($('#question').find(':selected').text() == 'Population') {
+            $('#arg-label').html(`Find the number of ${unit} when the population is <span class="underline">        </span>:`);
+        } else {
+            $('#arg-label').html(`Find the population when <span class="underline">        </span> ${unit} have passed:`);
+        }
     });
     $('#initial').change(function() {
         $('#capacity').attr('min', String(parseInt($('#initial').val())+1));
