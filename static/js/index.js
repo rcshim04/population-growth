@@ -30,7 +30,7 @@ $(document).ready(function (){
 
 function onlyNumberKey(evt) {
     var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-    if (ASCIICode >= 48 && ASCIICode <= 57 || ASCIICode == 45 )
+    if (ASCIICode >= 48 && ASCIICode <= 57)
         return true;
     return false;
 }
