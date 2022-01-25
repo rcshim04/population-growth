@@ -88,6 +88,7 @@ function generate(params) {
     var A = (M - P0)/P0;
 
     var x = 0;
+    var flag = true
     while (true) {
         var y = Math.round(1000 * M/(1 + A*Math.pow((M - P)/(A * P), x/t)))/1000;
         data.push([x, y]);
@@ -95,8 +96,12 @@ function generate(params) {
         if (y >= M) {
             break;
         }
+        if (y <= 0) {
+            flag = false;
+            break;
+        }
     }
-    data.push([x*1.1, M]);
+    data.push([x*1.1, (flag ? M : 0)]);
     return data;
 }
 function graph(params) {

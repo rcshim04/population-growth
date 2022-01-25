@@ -4,6 +4,9 @@ $(document).ready(function (){
         $('#sample-label').html(`The population is <span class="underline">        </span> after <span class="underline">        </span> ${unit}`)
         $('#sample-time-label').html(unit.substr(0,1).toUpperCase()+unit.substr(1)+':');
     });
+    $('#initial').change(function() {
+        $('#capacity').attr('min', String(parseInt($('#initial').val())+1));
+    });
     $('#question').change(function() {
         var unit = $('#unit').find(':selected').text().toLowerCase();
         $('.a-input').show();
