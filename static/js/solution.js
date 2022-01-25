@@ -93,9 +93,10 @@ function generate(params) {
     var x = 0;
     var flag = true
     while (true) {
-        var y = Math.round(1000 * M/(1 + A*Math.pow((M - P)/(A * P), x/t)))/1000;
+        var y = Math.max(Math.round(1000 * M/(1 + A*Math.pow((M - P)/(A * P), x/t)))/1000, 0)
         data.push([x, y]);
-        x++;
+        x += 0.1;
+        x = Math.round(10 * x)/10;
         if (y >= M) {
             break;
         }
@@ -104,7 +105,13 @@ function generate(params) {
             break;
         }
     }
-    data.push([x*1.1, (flag ? M : 0)]);
+    var mx = x*1.1;
+    while (x <= mx) {
+        var y = Math.max(Math.round(1000 * M/(1 + A*Math.pow((M - P)/(A * P), x/t)))/1000, 0);
+        data.push([x, y]);
+        x += 0.1;
+        x = Math.round(10 * x)/10;
+    }
     return data;
 }
 
@@ -131,7 +138,7 @@ function graph(params, coords) {
         .append('rect')
         .attr('x', padding)
         .attr('y', padding)
-        .attr('width', w - 2 * (padding + 20))
+        .attr('width', w - 2 * padding + 40)
         .attr('height', h - 2 * padding);
 
     let line_func = d3.line()
@@ -165,20 +172,96 @@ function graph(params, coords) {
     svg.append('g')
         .attr('transform', `translate(${padding + 20}, 0)`)
         .call(yAxis);
+    
+    let totalLength = svg.select('path').node().getTotalLength();
+
+    svg.select('path')
+        .attr('stroke-dasharray', totalLength + ' ' + totalLength)
+        .attr('stroke-dashoffset', totalLength)
+        .transition()
+        .duration(2000)
+        .ease(d3.easeLinear)
+        .attr('stroke-dashoffset', 0);
 
     svg.append('g')
         .append('circle')
         .style('fill', 'none')
         .attr('r', 5)
+        .attr('class', 'point')
         .attr('cx', xScale(coords[0]))
-        .attr('cy', yScale(coords[1]));
+        .attr('cy', yScale(coords[1]))
+        .attr('opacity', 0)
+        .transition()
+        .delay(2000*coords[0]/d3.max(data, function(d) {return d[0];}))
+        .duration(400)
+        .attr('opacity', 1);
     svg.append('g')
         .append('text')
         .attr('text-anchor', 'left')
         .attr('alignment-baseline', 'middle')
         .html(coords[0] + ', ' + coords[1])
         .attr('x', xScale(coords[0])+15)
-        .attr('y', yScale(coords[1]));
+        .attr('y', yScale(coords[1]))
+        .attr('opacity', 0)
+        .transition()
+        .delay(2000*coords[0]/d3.max(data, function(d) {return d[0];}))
+        .duration(400)
+        .attr('opacity', 1);
+    
+    var bisect = d3.bisector(function(d) {return d[0];}).left;
+
+    var focusXLine = svg.append('g')
+        .append('rect')
+        .attr('class', 'focusLine')
+        .attr('width', '1px');
+    var focusYLine = svg.append('g')
+        .append('rect')
+        .attr('class', 'focusLine')
+        .attr('height', '1px');
+    var focusCircle = svg.append('g')
+        .append('circle')
+        .attr('class', 'focusPoint')
+        .attr('r', 4)
+        .style("opacity", 0);
+    var focusText = svg.append('g')
+        .append('text')
+        .style("opacity", 0)
+        .attr("text-anchor", "left")
+        .attr("alignment-baseline", "middle");
+
+    svg.append('rect')
+        .attr('class', 'listening-rect')
+        .attr('width', w - 2 * padding + 40)
+        .attr('height', h - 2 * padding)
+        .on('mouseover', () => {
+            focusXLine.style('opacity', 1);
+            focusYLine.style('opacity', 1);
+            focusCircle.style('opacity', 1);
+            focusText.style('opacity', 1);
+        })
+        .on('mousemove', (event) => {
+            var x0 = xScale.invert(d3.pointer(event)[0]);
+            var i = bisect(data, x0, 1);
+            selectedData = data[i];
+            focusXLine.attr('x', xScale(selectedData[0])-0.5)
+                .attr('y', yScale(selectedData[1])-0.5)
+                .attr('height', h - padding - yScale(selectedData[1])+0.5);
+            focusYLine.attr('x', padding+19.5)
+                .attr('y', yScale(selectedData[1])-0.5)
+                .attr('width', xScale(selectedData[0]) - padding - 19.5);
+            focusCircle.attr('cx', xScale(selectedData[0]))
+                .attr('cy', yScale(selectedData[1]));
+            focusText.attr('x', xScale(selectedData[0])+15)
+                .attr('y', yScale(selectedData[1]))
+                .html(selectedData[0] + ', ' + selectedData[1]);
+        })
+        .on('mouseout', () => {
+            focusXLine.style('opacity', 0);
+            focusYLine.style('opacity', 0);
+            focusCircle.style('opacity', 0);
+            focusText.style('opacity', 0);
+        });
+
     
     return svg.node()
 }

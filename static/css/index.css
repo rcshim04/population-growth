@@ -75,10 +75,10 @@ function {
     max-width: 960px;
     max-height: 540px;
 }
-path, circle {
+path, .point {
     stroke: var(--theme);
 }
-text {
+text, .focusPoint, .focusLine {
     fill: var(--theme);
 }
 #theme {
@@ -87,6 +87,9 @@ text {
     right: 25px;
     width: 40px;
     height: 40px;
+}
+.listening-rect {
+    fill: transparent;
 }
 
 @media only screen and (max-width: 600px) {
