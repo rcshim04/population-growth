@@ -7,7 +7,6 @@ class Fraction {
 
 function solve(params) {
     showFunc(params);
-    graph(params);
     $('function').fadeIn();
     $('#graph').fadeIn();
     window.scrollTo(0, document.body.scrollHeight);
@@ -64,19 +63,23 @@ function showFunc(params) {
     
     var func = `\\frac{${M}}{1+${A_txt}(${MPAP})^{${coeff}t}}`
     $('function').text(`$$P(t) = ${func}$$`);
+    var ansx;
     if (params['question'] == 'time') {
         var ans = M/(1 + A_math*Math.pow((M - P)/(A_math * P), x/t));
         var rans = Math.floor(ans);
+        coords = [x, rans];
         $('function').append(`$$P(${x}) = ${rans}$$`);
         $('function').append(`Therefore, the population is ${rans} after ${x} ${params['unit']+(x > 1 ? 's' : '')}.`);
     } else {
         $('function').append(`$$${x} = ${func}$$`);
         var ans = t * Math.log((M - x)/(A_math * x))/Math.log((M - P)/(A_math * P));
         var rans = Math.round(1000 * ans)/1000;
+        coords = [rans, x];
         $('function').append(`$$t ${ans == rans ? '=' : '\\approx'} ${rans}$$`);
         $('function').append(`Therefore, when the population is ${rans}, ${x} ${params['unit']+(x > 1 ? 's' : '')} would've passed.`);
     }
     MathJax.typeset();
+    graph(params, coords);
 }
 
 function generate(params) {
@@ -104,7 +107,7 @@ function generate(params) {
     data.push([x*1.1, (flag ? M : 0)]);
     return data;
 }
-function graph(params) {
+function graph(params, coords) {
     $('#graph').empty();
     var w = 960;
     var h = 540;
@@ -112,7 +115,7 @@ function graph(params) {
 
     var data = generate(params);
 
-    let svg = d3.select('#graph')
+    let svg = d3.select('#graph');
 
     var xScale = d3.scaleLinear().domain(d3.extent(data, function(d) {return d[0];})).range([padding + 20, w - padding - 20]);
     var yScale = d3.scaleLinear()
@@ -136,7 +139,7 @@ function graph(params) {
         .curve(d3.curveNatural);
     svg.append('path')
         .datum(data)
-        .attr("clip-path", "url(#chart-area)")
+        .attr('clip-path', 'url(#chart-area)')
         .attr('fill', 'none')
         .attr('stroke', 'black')
         .attr('stroke-width', 2)
@@ -152,15 +155,30 @@ function graph(params) {
         .attr('transform', `rotate(-90, 30, ${h/2})`)
         .text('Population');
 
-    let xAxis = d3.axisBottom(xScale)
-    let yAxis = d3.axisLeft(yScale)
+    let xAxis = d3.axisBottom(xScale);
+    let yAxis = d3.axisLeft(yScale);
     
     svg.append('g')
         .attr('transform', `translate(0, ${h - padding})`)
-        .call(xAxis)
+        .call(xAxis);
     svg.append('g')
         .attr('transform', `translate(${padding + 20}, 0)`)
-        .call(yAxis)
+        .call(yAxis);
+
+    svg.append('g')
+        .append('circle')
+        .style('fill', 'none')
+        .attr('stroke', 'black')
+        .attr('r', 5)
+        .attr('cx', xScale(coords[0]))
+        .attr('cy', yScale(coords[1]));
+    svg.append('g')
+        .append('text')
+        .attr('text-anchor', 'left')
+        .attr('alignment-baseline', 'middle')
+        .html(coords[0] + ', ' + coords[1])
+        .attr('x', xScale(coords[0])+15)
+        .attr('y', yScale(coords[1]));
     
     return svg.node()
 }
