@@ -76,7 +76,7 @@ function showFunc(params) {
         var rans = Math.round(1000 * ans)/1000;
         coords = [rans, x];
         $('function').append(`$$t ${ans == rans ? '=' : '\\approx'} ${rans}$$`);
-        $('function').append(`Therefore, when the population is ${rans}, ${x} ${params['unit']+(x > 1 ? 's' : '')} would've passed.`);
+        $('function').append(`Therefore, when the population is ${x}, ${rans} ${params['unit']+(x > 1 ? 's' : '')} would've passed.`);
     }
     MathJax.typeset();
     graph(params, coords);
