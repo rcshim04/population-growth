@@ -39,17 +39,17 @@
                     </select><br>
 
                     <label for="initial">Initial Population:</label><br>
-                    <input type="number" id="initial" name="initial" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please enter an initial population.')" oninput="this.setCustomValidity('')"><br>
+                    <input type="number" id="initial" name="initial" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please enter a valid initial population.')" oninput="this.setCustomValidity('')"><br>
 
                     <label for="capacity">Carrying Capacity:</label><br>
-                    <input type="number" id="capacity" name="capacity" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please enter a carrying capacity.')" oninput="this.setCustomValidity('')"><br>
+                    <input type="number" id="capacity" name="capacity" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please enter a valid carrying capacity.')" oninput="this.setCustomValidity('')"><br>
                 </div>
                 <fieldset>
                     <legend id="sample-label">The population is <span class="underline">        </span> after <span class="underline">        </span> time</legend>
                     <label for="sample-pop">Population:</label><br>
-                    <input type="number" id="sample-pop" name="sample-pop" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a population.')" oninput="this.setCustomValidity('')"><br>
+                    <input type="number" id="sample-pop" name="sample-pop" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a valid population.')" oninput="this.setCustomValidity('')"><br>
                     <label for="sample-time" id="sample-time-label">Time:</label><br>
-                    <input type="number" id="sample-time" name="sample-time" min="1" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a time.')" oninput="this.setCustomValidity('')"><br>
+                    <input type="number" id="sample-time" name="sample-time" min="1" onkeypress="return onlyNumberKey(event)" required oninvalid="this.setCustomValidity('Please specify a valid time.')" oninput="this.setCustomValidity('')"><br>
                 </fieldset>
             </div>
             <div class="q-input">
@@ -61,7 +61,7 @@
                 </select><br>
             </div>
             <div class="a-input">
-                <label for="arg" id="arg-label" required oninvalid="this.setCustomValidity('Please enter a value.')" oninput="this.setCustomValidity('')"></label><br>
+                <label for="arg" id="arg-label" required oninvalid="this.setCustomValidity('Please enter a valid value.')" oninput="this.setCustomValidity('')"></label><br>
                 <input type="number" id="arg" name="arg" onkeypress="return onlyNumberKey(event)"><br>
             </div>
             <input type="submit" id="submit" value="Solve!">
