@@ -1,4 +1,5 @@
-$(document).ready(function (){
+$(document).ready(function () {
+    changeTheme();
     $('#unit').change(function() {
         var unit = $('#unit').find(':selected').text().toLowerCase();
         $('#sample-label').html(`The population is <span class="underline">        </span> after <span class="underline">        </span> ${unit}`)
@@ -33,4 +34,8 @@ function onlyNumberKey(evt) {
     if (ASCIICode >= 48 && ASCIICode <= 57)
         return true;
     return false;
+}
+
+function changeTheme() {
+    $(':root').css('--theme', $('#theme').val());
 }

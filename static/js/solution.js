@@ -107,6 +107,7 @@ function generate(params) {
     data.push([x*1.1, (flag ? M : 0)]);
     return data;
 }
+
 function graph(params, coords) {
     $('#graph').empty();
     var w = 960;

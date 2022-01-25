@@ -2,7 +2,7 @@
 
 :root {
     font-family: "Poppins", sans-serif;
-    color: #01796f;
+    color: var(--theme);
 }
 input, select, option {
     font-family: inherit;
@@ -34,13 +34,13 @@ input, select {
     margin-bottom: 10px;
     padding: 3px 5px;
     box-sizing: border-box;
-    border: 2px solid #01796f;
+    border: 2px solid var(--theme);
     border-radius: 4px;
-    color: #01796f !important;
+    color: var(--theme) !important;
     outline: 0;
 }
 input:focus, select:focus {
-    border: 2px solid #00554e;
+    border: 2px solid var(--theme);
 }
 .inputs {
     display: flex;
@@ -49,7 +49,7 @@ input:focus, select:focus {
     margin: 0 10px;
 }
 fieldset {
-    border: 2px solid #01796f;
+    border: 2px solid var(--theme);
     border-radius: 4px;
 }
 .q-input {
@@ -61,7 +61,7 @@ fieldset {
 }
 #submit {
     margin: 10px;
-    background-color: #98ddd6;
+    background-color: white;
 }
 .underline {
     text-decoration: underline; 
@@ -74,6 +74,13 @@ function {
     display: none;
     max-width: 960px;
     max-height: 540px;
+}
+#theme {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 40px;
+    height: 40px;
 }
 
 @media only screen and (max-width: 600px) {
