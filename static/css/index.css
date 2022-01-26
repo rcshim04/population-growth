@@ -103,7 +103,7 @@ text, .focusPoint, .focusLine {
         flex-direction: column;
     }
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1080px) {
     instructions {
         position: relative;
         width: 90%;
