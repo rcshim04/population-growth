@@ -69,7 +69,7 @@ function showFunc(params) {
         var rans = Math.round(ans);
         coords = [x, rans];
         $('function').append(`$$P(${x}) = ${rans}$$`);
-        $('function').append(`Therefore, the population is ${rans} after ${x} ${params['unit']+(x > 1 ? 's' : '')}.`);
+        $('function').append(`Therefore, the population is ${rans} after ${x} ${params['unit']+(x != 1 ? 's' : '')}.`);
     } else {
         $('function').append(`$$${x} = ${func}$$`);
         var ans = t * Math.log((M - x)/(A_math * x))/Math.log((M - P)/(A_math * P));
@@ -79,7 +79,7 @@ function showFunc(params) {
         if (rans == Infinity) {
             rans = 'an infinite number of'
         }
-        $('function').append(`Therefore, when the population is ${x}, ${rans} ${params['unit']+(x > 1 ? 's' : '')} would've passed.`);
+        $('function').append(`Therefore, when the population is ${x}, ${rans} ${params['unit']+(x != 1 ? 's' : '')} would've passed.`);
         if (x == M) {
             $('function').append('<br>The carrying capacity is an asymptote, the population will technically never reach it!');
         }
