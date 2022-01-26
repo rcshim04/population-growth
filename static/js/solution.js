@@ -91,26 +91,18 @@ function generate(params) {
     var A = (M - P0)/P0;
 
     var x = 0;
-    var flag = true
-    while (true) {
+    var domain = 1.1 * t * Math.log((0.0001)/(A * (M - 0.0001)))/Math.log((M - P)/(A * P));
+    var step = domain/960;
+    while (step <= domain) {
         var y = Math.max(Math.round(1000 * M/(1 + A*Math.pow((M - P)/(A * P), x/t)))/1000, 0)
-        data.push([x, y]);
-        x += 0.1;
-        x = Math.round(10 * x)/10;
+        data.push([Math.round(1000 * x)/1000, y]);
+        x += step;
         if (y >= M) {
             break;
         }
         if (y <= 0) {
-            flag = false;
             break;
         }
-    }
-    var mx = x*1.1;
-    while (x <= mx) {
-        var y = Math.max(Math.round(1000 * M/(1 + A*Math.pow((M - P)/(A * P), x/t)))/1000, 0);
-        data.push([x, y]);
-        x += 0.1;
-        x = Math.round(10 * x)/10;
     }
     return data;
 }
