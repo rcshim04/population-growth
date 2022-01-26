@@ -16,6 +16,9 @@ $(document).ready(function () {
             $('#capacity').prop('disabled', true);
         } else {
             $('#capacity').prop('disabled', false);
+            if ($('#capacity').val() != null && $('#capacity').val() != '' && $('#initial').val() >= $('#capacity').val()) {
+                $('#capacity').val(parseInt($('#initial').val())+1);
+            }
         }
     });
     $('#question').change(function() {
