@@ -231,7 +231,9 @@ function graph(params, coords) {
 
     svg.append('rect')
         .attr('class', 'listening-rect')
-        .attr('width', w - 2 * padding + 40)
+        .attr('x', padding + 20)
+        .attr('y', padding)
+        .attr('width', w - 2 * padding - 40)
         .attr('height', h - 2 * padding)
         .on('mouseover', () => {
             focusXLine.style('opacity', 1);
