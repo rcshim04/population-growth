@@ -67,6 +67,12 @@ fieldset {
     text-decoration: underline; 
     white-space: pre;
 }
+instructions {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: 200px;
+}
 function {
     display: none;
 }
@@ -92,7 +98,7 @@ text, .focusPoint, .focusLine {
     fill: transparent;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .inputs {
         flex-direction: column;
     }
