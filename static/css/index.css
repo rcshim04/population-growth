@@ -47,6 +47,7 @@ container {
     padding: 25px;
 }
 input, select {
+    margin-top: 5px;
     margin-bottom: 10px;
     padding: 3px 5px;
     box-sizing: border-box;
@@ -79,6 +80,7 @@ fieldset {
 #submit {
     margin: 10px;
     background-color: white;
+    padding: 3px 8px;
 }
 .underline {
     text-decoration: underline; 
