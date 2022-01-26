@@ -63,10 +63,10 @@ function showFunc(params) {
     
     var func = `\\frac{${M}}{1+${A_txt}(${MPAP})^{${coeff}t}}`
     $('function').text(`$$P(t) = ${func}$$`);
-    var ansx;
+    var coords;
     if (params['question'] == 'time') {
         var ans = M/(1 + A_math*Math.pow((M - P)/(A_math * P), x/t));
-        var rans = Math.floor(ans);
+        var rans = Math.round(ans);
         coords = [x, rans];
         $('function').append(`$$P(${x}) = ${rans}$$`);
         $('function').append(`Therefore, the population is ${rans} after ${x} ${params['unit']+(x > 1 ? 's' : '')}.`);
