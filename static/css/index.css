@@ -36,7 +36,7 @@ background svg #bg {
 }
 background svg #overlay {
     fill: var(--bg);
-    fill-opacity: 0.6;
+    fill-opacity: 0.8;
 }
 container {
     width: calc(100vw - 50px);
