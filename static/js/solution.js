@@ -175,10 +175,11 @@ function graph(params, coords) {
         .ease(d3.easeLinear)
         .attr('stroke-dashoffset', 0);
 
+    console.log(coords[0], coords[1]);
     svg.append('g')
         .append('circle')
         .style('fill', 'none')
-        .attr('r', 5)
+        .attr('r', 6)
         .attr('class', 'point')
         .attr('cx', xScale(coords[0]))
         .attr('cy', yScale(coords[1]))

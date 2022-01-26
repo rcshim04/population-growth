@@ -11,13 +11,15 @@ $(document).ready(function () {
         }
     });
     $('#initial').change(function() {
-        $('#capacity').attr('min', String(parseInt($('#initial').val())+1));
+        $('#capacity').attr('min', String(parseInt($('#initial').val())+2));
+        $('#sample-pop').attr('min', String(parseInt($('#initial').val())+1));
         if($('#initial').val() == null || $('#initial').val() == '') {
             $('#capacity').prop('disabled', true);
         } else {
             $('#capacity').prop('disabled', false);
             if ($('#capacity').val() != null && $('#capacity').val() != '' && $('#initial').val() >= $('#capacity').val()) {
-                $('#capacity').val(parseInt($('#initial').val())+1);
+                $('#capacity').val(parseInt($('#initial').val())+2);
+                $('#sample-pop').val(parseInt($('#initial').val())+1);
             }
         }
     });
