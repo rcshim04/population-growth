@@ -116,10 +116,13 @@ function changeTheme() {
         var hsv = rgbToHsv(rgb[0], rgb[1], rgb[2]);
         if (hsv[2] > 0.5) {
             $(':root').css('--bg', '#202124');
-            $(':root').css('--disabled', '#484a51');
+            $(':root').css('--bgtr', '#2021247F');
+            $(':root').css('--disabled', '#484a517F');
         } else {
             $(':root').css('--bg', '#ffffff');
-            $(':root').css('--disabled', '#d9d9d9');
+            $(':root').css('--bgtr', '#ffffff7F');
+            $(':root').css('--disabled', '#d9d9d97F');
+            
         }
     }
 }
