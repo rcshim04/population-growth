@@ -76,7 +76,13 @@ function showFunc(params) {
         var rans = Math.round(1000 * ans)/1000;
         coords = [rans, x];
         $('function').append(`$$t ${ans == rans ? '=' : '\\approx'} ${rans}$$`);
+        if (rans == Infinity) {
+            rans = 'an infinite number of'
+        }
         $('function').append(`Therefore, when the population is ${x}, ${rans} ${params['unit']+(x > 1 ? 's' : '')} would've passed.`);
+        if (x == M) {
+            $('function').append('<br>The carrying capacity is an asymptote, the population will technically never reach it!');
+        }
     }
     MathJax.typeset();
     graph(params, coords);
@@ -91,19 +97,14 @@ function generate(params) {
     var A = (M - P0)/P0;
 
     var x = 0;
-    var domain = 1.1 * t * Math.log((0.0001)/(A * (M - 0.0001)))/Math.log((M - P)/(A * P));
+    var domain = 1.1 * t * Math.log((0.00001)/(A * (M - 0.00001)))/Math.log((M - P)/(A * P));
     var step = domain/960;
-    while (step <= domain) {
+    while (x <= domain) {
         var y = Math.max(Math.round(1000 * M/(1 + A*Math.pow((M - P)/(A * P), x/t)))/1000, 0)
         data.push([Math.round(1000 * x)/1000, y]);
         x += step;
-        if (y >= M) {
-            break;
-        }
-        if (y <= 0) {
-            break;
-        }
     }
+    console.log(x);
     return data;
 }
 
@@ -175,7 +176,6 @@ function graph(params, coords) {
         .ease(d3.easeLinear)
         .attr('stroke-dashoffset', 0);
 
-    console.log(coords[0], coords[1]);
     svg.append('g')
         .append('circle')
         .style('fill', 'none')

@@ -3,37 +3,84 @@ $(document).ready(function () {
     $('#unit').change(function() {
         var unit = $('#unit').find(':selected').text().toLowerCase();
         $('#sample-label').html(`The population is <span class="underline">        </span> after <span class="underline">        </span> ${unit}`)
-        $('#sample-time-label').html(unit.substr(0,1).toUpperCase()+unit.substr(1)+':');
+        $('#sample-time-label').html(unit.substring(0,1).toUpperCase()+unit.substring(1)+':');
         if($('#question').find(':selected').text() == 'Population') {
             $('#arg-label').html(`Find the number of ${unit} when the population is <span class="underline">        </span>:`);
         } else {
             $('#arg-label').html(`Find the population when <span class="underline">        </span> ${unit} have passed:`);
         }
     });
+    $('#sample-time').change(function() {
+        $(this).val(parseInt($(this).val()));
+        if($(this).val().length > 6) {
+            $(this).val($(this).val().substring(0, 6));
+        }
+        if(parseInt($(this).val()) > 999999) {
+            $(this).val('999999');
+        }
+    });
+    $('#arg').change(function() {
+        $(this).val(parseInt($(this).val()));
+        if($(this).val().length > 6) {
+            $(this).val($(this).val().substring(0, 6));
+        }
+        if(parseInt($(this).val()) > 999999) {
+            $(this).val('999999');
+        }
+    });
     $('#initial').change(function() {
+        $(this).val(parseInt($(this).val()));
+        if($(this).val().length > 6) {
+            $(this).val($(this).val().substring(0, 6));
+        }
+        if(parseInt($(this).val()) > 999997) {
+            $(this).val('999997');
+        }
         $('#sample-pop').attr('min', String(parseInt($('#initial').val())+1));
         $('#capacity').attr('min', String(parseInt($('#sample-pop').val())+1));
         if($('#initial').val() == null || $('#initial').val() == '' || $('#sample-pop').val() == null || $('#sample-pop').val() == '') {
             $('#capacity').prop('disabled', true);
         } else {
             $('#capacity').prop('disabled', false);
-            if ($('#sample-pop').val() != null && $('#sample-pop').val() != '' && $('#initial').val() >= $('#sample-pop').val()) {
+            if ($('#sample-pop').val() != null && $('#sample-pop').val() != '' && parseInt($('#initial').val()) >= parseInt($('#sample-pop').val())) {
                 $('#sample-pop').val(parseInt($('#initial').val())+1);
             }
-            if($('#capacity').val() != null && $('#capacity').val() != '' && $('#sample-pop').val() >= $('#capacity').val()) {
+            if($('#capacity').val() != null && $('#capacity').val() != '' && parseInt($('#sample-pop').val()) >= parseInt($('#capacity').val())) {
                 $('#capacity').val(parseInt($('#sample-pop').val())+1);
             }
         }
     });
     $('#sample-pop').change(function() {
+        $(this).val(parseInt($(this).val()));
+        if($(this).val().length > 6) {
+            $(this).val($(this).val().substring(0, 6));
+        }
+        if(parseInt($(this).val()) > 999998) {
+            $(this).val(999998);
+        }
         $('#capacity').attr('min', String(parseInt($('#sample-pop').val())+1));
         if($('#initial').val() == null || $('#initial').val() == '' || $('#sample-pop').val() == null || $('#sample-pop').val() == '') {
             $('#capacity').prop('disabled', true);
         } else {
             $('#capacity').prop('disabled', false);
-            if($('#capacity').val() != null && $('#capacity').val() != '' && $('#capacity').val() >= $('#capacity').val()) {
+            if ($('#sample-pop').val() != null && $('#sample-pop').val() != '' && parseInt($('#initial').val()) >= parseInt($('#sample-pop').val())) {
+                $('#sample-pop').val(parseInt($('#initial').val())+1);
+            }
+            if($('#capacity').val() != null && $('#capacity').val() != '' && parseInt($('#sample-pop').val()) >= parseInt($('#capacity').val())) {
                 $('#capacity').val(parseInt($('#sample-pop').val())+1);
             }
+        }
+    });
+    $('#capacity').change(function() {
+        $(this).val(parseInt($(this).val()));
+        if($(this).val().length > 6) {
+            $(this).val($(this).val().substring(0, 6));
+        }
+        if(parseInt($(this).val()) > 999999) {
+            $(this).val('999999');
+        }
+        if($('#capacity').val() != null && $('#capacity').val() != '' && parseInt($('#sample-pop').val()) >= parseInt($('#capacity').val())) {
+            $('#capacity').val(parseInt($('#sample-pop').val())+1);
         }
     });
     $('#question').change(function() {
