@@ -3,6 +3,7 @@
 :root {
     font-family: "Poppins", sans-serif;
     color: var(--theme);
+    --bg: #ffffff;
 }
 input, select, option {
     font-family: inherit;
@@ -21,6 +22,21 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
+background svg {
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+}
+background svg path {
+    fill: var(--theme);
+}
+background svg #bg {
+    fill: var(--bg);
+}
+background svg #overlay {
+    fill: var(--bg);
+    fill-opacity: 0.6;
+}
 container {
     width: calc(100vw - 50px);
     min-height: calc(100vh - 50px);
@@ -37,6 +53,7 @@ input, select {
     border: 2px solid var(--theme);
     border-radius: 4px;
     color: var(--theme) !important;
+    background-color: var(--bg) !important;
     outline: 0;
 }
 input:focus, select:focus {
