@@ -12,9 +12,17 @@ $(document).ready(function () {
     });
     $('#initial').change(function() {
         $('#capacity').attr('min', String(parseInt($('#initial').val())+1));
+        if($('#initial').val() == null || $('#initial').val() == '') {
+            $('#capacity').prop('disabled', true);
+        } else {
+            $('#capacity').prop('disabled', false);
+        }
     });
     $('#question').change(function() {
         var unit = $('#unit').find(':selected').text().toLowerCase();
+        if (unit == 'select an option') {
+            unit = 'time units'
+        }
         $('.a-input').show();
         if($('#question').find(':selected').text() == 'Population') {
             $('#arg-label').html(`Find the number of ${unit} when the population is <span class="underline">        </span>:`);
@@ -43,8 +51,10 @@ function changeTheme() {
         var hsv = rgbToHsv(rgb[0], rgb[1], rgb[2]);
         if (hsv[2] > 0.5) {
             $(':root').css('--bg', '#202124');
+            $(':root').css('--disabled', '#484a51');
         } else {
             $(':root').css('--bg', '#ffffff');
+            $(':root').css('--disabled', '#d9d9d9');
         }
     }
 }

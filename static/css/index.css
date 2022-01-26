@@ -4,6 +4,7 @@
     font-family: "Poppins", sans-serif;
     color: var(--theme);
     --bg: #ffffff;
+    --disabled: #d9d9d9;
 }
 input, select, option {
     font-family: inherit;
@@ -56,6 +57,9 @@ input, select {
     color: var(--theme) !important;
     background-color: var(--bg) !important;
     outline: 0;
+}
+input:disabled {
+    background-color: var(--disabled) !important;
 }
 input:focus, select:focus {
     border: 2px solid var(--theme);
