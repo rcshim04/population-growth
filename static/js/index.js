@@ -11,15 +11,28 @@ $(document).ready(function () {
         }
     });
     $('#initial').change(function() {
-        $('#capacity').attr('min', String(parseInt($('#initial').val())+2));
         $('#sample-pop').attr('min', String(parseInt($('#initial').val())+1));
-        if($('#initial').val() == null || $('#initial').val() == '') {
+        $('#capacity').attr('min', String(parseInt($('#sample-pop').val())+1));
+        if($('#initial').val() == null || $('#initial').val() == '' || $('#sample-pop').val() == null || $('#sample-pop').val() == '') {
             $('#capacity').prop('disabled', true);
         } else {
             $('#capacity').prop('disabled', false);
-            if ($('#capacity').val() != null && $('#capacity').val() != '' && $('#initial').val() >= $('#capacity').val()) {
-                $('#capacity').val(parseInt($('#initial').val())+2);
+            if ($('#sample-pop').val() != null && $('#sample-pop').val() != '' && $('#initial').val() >= $('#sample-pop').val()) {
                 $('#sample-pop').val(parseInt($('#initial').val())+1);
+            }
+            if($('#capacity').val() != null && $('#capacity').val() != '' && $('#sample-pop').val() >= $('#capacity').val()) {
+                $('#capacity').val(parseInt($('#sample-pop').val())+1);
+            }
+        }
+    });
+    $('#sample-pop').change(function() {
+        $('#capacity').attr('min', String(parseInt($('#sample-pop').val())+1));
+        if($('#initial').val() == null || $('#initial').val() == '' || $('#sample-pop').val() == null || $('#sample-pop').val() == '') {
+            $('#capacity').prop('disabled', true);
+        } else {
+            $('#capacity').prop('disabled', false);
+            if($('#capacity').val() != null && $('#capacity').val() != '' && $('#capacity').val() >= $('#capacity').val()) {
+                $('#capacity').val(parseInt($('#sample-pop').val())+1);
             }
         }
     });
