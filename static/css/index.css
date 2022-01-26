@@ -128,6 +128,9 @@ text, .focusPoint, .focusLine {
     .inputs {
         flex-direction: column;
     }
+    #graph {
+        display: none !important;
+    }
 }
 @media only screen and (max-width: 1080px) {
     instructions {
