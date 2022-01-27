@@ -144,18 +144,6 @@ text, .focusPoint, .focusLine {
     #graph {
         display: none !important;
     }
-    .credits {
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        top: 0;
-        left: 0;
-        margin-bottom: 25px;
-        text-align: center;
-    }
-    .credits a {
-        margin-right: 0;
-    }
 }
 @media only screen and (max-width: 1080px) {
     instructions {
@@ -163,5 +151,18 @@ text, .focusPoint, .focusLine {
         width: 90%;
         top: 0;
         left: 0;
+    }
+}
+@media only screen and (max-width: 1440px) {
+    .credits {
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        top: 0;
+        left: 0;
+        text-align: center;
+    }
+    .credits a {
+        margin-right: 0;
     }
 }
