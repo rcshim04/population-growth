@@ -161,6 +161,7 @@ text, .focusPoint, .focusLine {
         top: 0;
         left: 0;
         text-align: center;
+        margin-top: 15px;
     }
     .credits a {
         margin-right: 0;
