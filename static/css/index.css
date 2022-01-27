@@ -6,6 +6,7 @@
     --bg: #ffffff;
     --bgtr: #ffffff7F;
     --disabled: #d9d9d97BD;
+    font-size: 1em;
 }
 input, select, option {
     font-family: inherit;
@@ -123,6 +124,18 @@ text, .focusPoint, .focusLine {
 .listening-rect {
     fill: transparent;
 }
+.credits {
+    display: flex;
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    margin: 0;
+    text-align: left;
+}
+.credits a {
+    margin-right: 10px;
+    color: var(--theme);
+}
 
 @media only screen and (max-width: 800px) {
     .inputs {
@@ -130,6 +143,18 @@ text, .focusPoint, .focusLine {
     }
     #graph {
         display: none !important;
+    }
+    .credits {
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        top: 0;
+        left: 0;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    .credits a {
+        margin-right: 0;
     }
 }
 @media only screen and (max-width: 1080px) {
