@@ -226,6 +226,15 @@ function graph(params, coords) {
         .attr('class', 'slopeLine')
         .attr('stroke-width', '2px')
         .attr('stroke-dasharray', '5,5');
+    var i = bisect(data, coords[0], 1);
+    if (i < data.length - 1) {
+        slopeCoords = getSlopeLine(data[i], data[i+1]);
+
+        slopeLine.attr('x1', xScale(slopeCoords[0]))
+            .attr('y1', yScale(slopeCoords[1]))
+            .attr('x2', xScale(slopeCoords[2]))
+            .attr('y2', yScale(slopeCoords[3]));
+    }
 
     svg.append('rect')
         .attr('class', 'listening-rect')
@@ -256,28 +265,12 @@ function graph(params, coords) {
                 .attr('y', yScale(selectedData[1]))
                 .html(selectedData[0] + ', ' + selectedData[1]);
             if (i < data.length - 1) {
-                p1 = data[i]
-                p2 = data[i+1];
-                slope = (p2[1]-p1[1])/(p2[0]-p1[0]);
-                b = p1[1] - slope*p1[0];
+                slopeCoords = getSlopeLine(data[i], data[i+1]);
 
-                startx = data[0][0];
-                starty = slope*startx + b;
-                if (starty < data[0][1]) {
-                    starty = data[0][1];
-                    startx = (starty - b)/slope;
-                }
-                endx = data[data.length-1][0];
-                endy = slope*(endx) + b;
-                if (endy > 21*data[data.length-1][1]/20) {
-                    endy = 21*data[data.length-1][1]/20;
-                    endx = (endy - b)/slope;
-                }
-
-                slopeLine.attr('x1', xScale(startx))
-                    .attr('y1', yScale(starty))
-                    .attr('x2', xScale(endx))
-                    .attr('y2', yScale(endy));
+                slopeLine.attr('x1', xScale(slopeCoords[0]))
+                    .attr('y1', yScale(slopeCoords[1]))
+                    .attr('x2', xScale(slopeCoords[2]))
+                    .attr('y2', yScale(slopeCoords[3]));
             }
         })
         .on('mouseout', () => {
@@ -290,4 +283,23 @@ function graph(params, coords) {
 
     
     return svg.node()
+}
+
+function getSlopeLine(p1, p2) {
+    slope = (p2[1]-p1[1])/(p2[0]-p1[0]);
+    b = p1[1] - slope*p1[0];
+
+    startx = data[0][0];
+    starty = slope*startx + b;
+    if (starty < data[0][1]) {
+        starty = data[0][1];
+        startx = (starty - b)/slope;
+    }
+    endx = data[data.length-1][0];
+    endy = slope*(endx) + b;
+    if (endy > 21*data[data.length-1][1]/20) {
+        endy = 21*data[data.length-1][1]/20;
+        endx = (endy - b)/slope;
+    }
+    return [startx, starty, endx, endy];
 }
