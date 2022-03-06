@@ -221,6 +221,11 @@ function graph(params, coords) {
         .style("opacity", 0)
         .attr("text-anchor", "left")
         .attr("alignment-baseline", "middle");
+    var slopeLine = svg.append('g')
+        .append('line')
+        .attr('class', 'slopeLine')
+        .attr('stroke-width', '2px')
+        .attr('stroke-dasharray', '5,5');
 
     svg.append('rect')
         .attr('class', 'listening-rect')
@@ -233,6 +238,7 @@ function graph(params, coords) {
             focusYLine.style('opacity', 1);
             focusCircle.style('opacity', 1);
             focusText.style('opacity', 1);
+            slopeLine.style('opacity', 1);
         })
         .on('mousemove', (event) => {
             var x0 = xScale.invert(d3.pointer(event)[0]);
@@ -249,12 +255,37 @@ function graph(params, coords) {
             focusText.attr('x', xScale(selectedData[0])+15)
                 .attr('y', yScale(selectedData[1]))
                 .html(selectedData[0] + ', ' + selectedData[1]);
+            if (i < data.length - 1) {
+                p1 = data[i]
+                p2 = data[i+1];
+                slope = (p2[1]-p1[1])/(p2[0]-p1[0]);
+                b = p1[1] - slope*p1[0];
+
+                startx = data[0][0];
+                starty = slope*startx + b;
+                if (starty < data[0][1]) {
+                    starty = data[0][1];
+                    startx = (starty - b)/slope;
+                }
+                endx = data[data.length-1][0];
+                endy = slope*(endx) + b;
+                if (endy > 21*data[data.length-1][1]/20) {
+                    endy = 21*data[data.length-1][1]/20;
+                    endx = (endy - b)/slope;
+                }
+
+                slopeLine.attr('x1', xScale(startx))
+                    .attr('y1', yScale(starty))
+                    .attr('x2', xScale(endx))
+                    .attr('y2', yScale(endy));
+            }
         })
         .on('mouseout', () => {
             focusXLine.style('opacity', 0);
             focusYLine.style('opacity', 0);
             focusCircle.style('opacity', 0);
             focusText.style('opacity', 0);
+            slopeLine.style('opacity', 0);
         });
 
     
